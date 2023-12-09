@@ -1,4 +1,4 @@
-pragma solidity >=0.5.16;
+pragma solidity;
 
 contract Election {
     struct Candidate {
@@ -7,29 +7,35 @@ contract Election {
         string party;
         uint voteCount;
     }
-    mapping(address => bool) public voters;
-    mapping(uint => Candidate) public candidates;
-    uint public candidatesCount;
-    event votedEvent (
-        uint indexed _candidateId
+    
+    mapping(address => bool) public hasVoted;
+    mapping(uint => Candidate) public candidateRegistry;
+    uint public candidateCount;
+    
+    event VotedEvent (
+        uint indexed candidateId
     );
+
     constructor () public {
-        addCandidate("Narendra D Modi","Bharatiya Janata Party");
-        addCandidate("Rahul Gandhi","Indian National Congress");
-        addCandidate("Akhilesh Yadav","Samajvadi Party");
-        addCandidate("Mamta Banarjee","All India Trinamool Congress");
-        addCandidate("Mayavti","Bahujan Samaj Party");
-        addCandidate("NOTA","None of the above");
+        addCandidate("Narendra D Modi", "Bharatiya Janata Party");
+        addCandidate("Rahul Gandhi", "Indian National Congress");
+        addCandidate("Akhilesh Yadav", "Samajvadi Party");
+        addCandidate("Mamta Banarjee", "All India Trinamool Congress");
+        addCandidate("Mayavati", "Bahujan Samaj Party");
+        addCandidate("NOTA", "None of the above");
     }
-    function addCandidate (string memory name,string memory party) private {
-        candidatesCount ++;
-        candidates[candidatesCount] = Candidate(candidatesCount, name,party, 0);
+
+    function addCandidate (string memory name, string memory party) private {
+        candidateCount++;
+        candidateRegistry[candidateCount] = Candidate(candidateCount, name, party, 0);
     }
-    function vote (uint _candidateId) public {
-        require(!voters[msg.sender]);
-        require(_candidateId > 0 && _candidateId <= candidatesCount);
-        voters[msg.sender] = true;
-        candidates[_candidateId].voteCount ++;
-        emit votedEvent(_candidateId);
+
+    function vote (uint candidateId) public {
+        require(!hasVoted[msg.sender]);
+        require(candidateId > 0 && candidateId <= candidateCount);
+
+        hasVoted[msg.sender] = true;
+        candidateRegistry[candidateId].voteCount++;
+        emit VotedEvent(candidateId);
     }
 }

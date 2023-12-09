@@ -1,23 +1,24 @@
-pragma solidity >=0.5.16;
+pragma solidity;
 
 contract Migrations {
-  address public owner;
-  uint public last_completed_migration;
+    address public owner;
+    uint public lastCompletedMigration;
 
-  modifier restricted() {
-    if (msg.sender == owner) _;
-  }
+    modifier restricted() {
+        require(msg.sender == owner, "Not authorized");
+        _;
+    }
 
-  constructor () public{
-    owner = msg.sender;
-  }
+    constructor () public {
+        owner = msg.sender;
+    }
 
-  function setCompleted(uint completed) public{
-    last_completed_migration = completed;
-  }
+    function setCompleted(uint completed) public restricted {
+        lastCompletedMigration = completed;
+    }
 
-  function upgrade(address new_address) public {
-    Migrations upgraded = Migrations(new_address);
-    upgraded.setCompleted(last_completed_migration);
-  }
+    function upgrade(address newAddress) public restricted {
+        Migrations upgraded = Migrations(newAddress);
+        upgraded.setCompleted(lastCompletedMigration);
+    }
 }

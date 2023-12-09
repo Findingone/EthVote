@@ -7,38 +7,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>VoteChain</title>
   <link rel="shortcut icon" href="img/vote.svg" type="image/x-icon">
-
   <link href="css/landing2.css" rel="stylesheet">
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
   <link href="https://fonts.googleapis.com/css2?family=Arimo&display=swap" rel="stylesheet">
-  <header>
-    <div id="navbar-custom"></div>
-
-  </header>
+  <!-- Additional meta tags for SEO -->
+  <meta name="description" content="Description of your voting application">
+  <meta name="keywords" content="voting, elections, blockchain">
+  <meta name="author" content="Your Name">
 </head>
 
 <body oncontextmenu="return false;">
-  <div id="nav-placeholder">
+  <div id="nav-placeholder"></div>
 
-  </div>
-  <div class="row" class="align-middle">
+  <div class="row align-middle">
     <div class="col-lg-12 col-sm-12 col-md-12">
       <div id="loader" class="text-center align-middle">
         <div class="spinner-border text-info" role="status">
-          <span class="sr-only ">Loading Please Wait...</span>
+          <span class="sr-only">Loading Please Wait...</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="content" style="display: none;" >
+  <div id="content" style="display: none;">
     <div class="container" id="votingPage">
       <div class="row" id="check-web3" style="margin-top: 30px;"></div>
       <div class="row">
         <div class="col-lg-6 col-sm-12">
-          <img src="https://d30i16bbj53pdg.cloudfront.net/wp-content/uploads/2018/10/vote-for-blog.jpg" width="500px" height="400px" alt=" votingPage">
+          <img src="https://d30i16bbj53pdg.cloudfront.net/wp-content/uploads/2018/10/vote-for-blog.jpg" width="500px"
+            height="400px" alt="votingPage">
         </div>
         <div class="col-lg-6 col-sm-12">
           <div>
@@ -46,20 +43,18 @@
               <thead>
                 <tr>
                   <th style="color: whitesmoke;">Sno</th>
-                  <th style="color: whitesmoke;">Candidate </th>
+                  <th style="color: whitesmoke;">Candidate</th>
                   <th style="color: whitesmoke;">Party of Candidate</th>
                   <th style="color: whitesmoke;">Votes</th>
                 </tr>
               </thead>
-              <tbody id="candidatesResults" style="color: whitesmoke; ">
-              </tbody>
+              <tbody id="candidatesResults" style="color: whitesmoke; "></tbody>
             </table>
             <hr />
-            <form onSubmit="App.castVote(); return false;">
-              <div class="form-group"  style="color: whitesmoke;">
+            <form onsubmit="App.castVote(); return false;">
+              <div class="form-group" style="color: whitesmoke;">
                 <label for="candidatesSelect">Select Your Candidate to Vote</label>
-                <select class="form-control" id="candidatesSelect">
-                </select>
+                <select class="form-control" id="candidatesSelect"></select>
               </div>
               <button type="submit" class="btn btn-primary btn-success center-block">Vote</button>
               <hr />
@@ -68,28 +63,25 @@
           </div>
         </div>
       </div><br>
-      <div class="row" id="vote-msg" style="margin-top: 30px;">
-      </div>
+      <div class="row" id="vote-msg" style="margin-top: 30px;"></div>
     </div>
-
-
-
   </div>
+
   <script src="js/navbar.js"></script>
   <script>
-    window.addEventListener('load', function() {
-  if (typeof web3 !== 'undefined') {
-    if (web3.currentProvider.isMetaMask === true) {
-      console.log('MetaMask is active')
-    } else {
-      $('#check-web3').html(`<div class="alert alert-danger text-center" role="alert">
-          <span>Please Install Metamask for voting</span>
-        </div>`)
-    }
-  } else {
-    console.log('web3 is not found')
-  }
-})
+    window.addEventListener('load', function () {
+      if (typeof web3 !== 'undefined') {
+        if (web3.currentProvider.isMetaMask === true) {
+          console.log('MetaMask is active')
+        } else {
+          $('#check-web3').html(`<div class="alert alert-danger text-center" role="alert">
+              <span>Please Install Metamask for voting</span>
+            </div>`)
+        }
+      } else {
+        console.log('web3 is not found')
+      }
+    })
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
@@ -101,7 +93,6 @@
   <script src="js/web3.min.js"></script>
   <script src="js/truffle-contract.js"></script>
   <script src="js/app.js"></script>
-
 </body>
 
 </html>
